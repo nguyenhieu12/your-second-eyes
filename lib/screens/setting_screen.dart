@@ -15,13 +15,8 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: controller,
-      scrollDirection: Axis.horizontal,
-      children: [
-        SettingScreen(),
-        InstructionScreen()
-      ],
+    return Container(
+      child: Text('Setting'),
     );
   }
 }

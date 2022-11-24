@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:your_second_eyes/screens/instruction_screen.dart';
-import 'package:your_second_eyes/widgets/page_view_instructor.dart';
+import 'package:your_second_eyes/widgets/page_view.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
