@@ -10,12 +10,12 @@ class InstructionScreen extends StatefulWidget {
 
 class _InstructionScreenState extends State<InstructionScreen> {
   final FlutterTts flutterTts = FlutterTts();
-  final instructionText = "";
+  final instructionText = "Hướng dẫn sử dụng";
 
   speak() async {
     await flutterTts.setLanguage("vi-VN");
-    await flutterTts.setPitch(1);
-    await flutterTts.setVolume(1);
+    await flutterTts.setPitch(1.0);
+    await flutterTts.setVolume(1.0);
     await flutterTts.speak(instructionText);
   }
 
@@ -31,7 +31,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 15, top: 180),
+            padding: const EdgeInsets.only(left: 15, top: 150),
             child: DefaultTextStyle(
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -42,12 +42,19 @@ class _InstructionScreenState extends State<InstructionScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, top: 250),
+            padding: const EdgeInsets.only(left: 10, top: 200),
             child: IconButton(
               icon: Image.asset('assets/instructor_button.png'),
               iconSize: 370,
               onPressed: () => speak(),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 50, top: 600),
+            child: Image.asset('assets/blue_arrow.png',
+              width: 300,
+              height: 130,
+            )
           )
         ],
       ),

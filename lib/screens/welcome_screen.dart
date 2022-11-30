@@ -14,7 +14,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 2), (){
+    Timer(Duration(seconds: 5), (){
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>
           PageViewInstructor())).then((value) {});
     });
