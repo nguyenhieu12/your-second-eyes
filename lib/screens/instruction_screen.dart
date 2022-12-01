@@ -31,7 +31,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 15, top: 150),
+            padding: const EdgeInsets.only(left: 15, top: 120),
             child: DefaultTextStyle(
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -52,8 +52,8 @@ class _InstructionScreenState extends State<InstructionScreen> {
           Padding(
             padding: const EdgeInsets.only(left: 50, top: 600),
             child: Image.asset('assets/blue_arrow.png',
-              width: 300,
-              height: 130,
+              width: 280,
+              height: 120,
             )
           )
         ],

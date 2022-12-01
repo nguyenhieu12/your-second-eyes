@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:your_second_eyes/screens/instruction_screen.dart';
-import 'package:your_second_eyes/screens/show_text_screen.dart';
+import 'package:your_second_eyes/screens/show_text_scanned.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -24,19 +24,7 @@ class _SettingScreenState extends State<SettingScreen> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             fit: BoxFit.cover,
-          ),
-          TextButton(
-            child: Text('Change',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 50
-              )
-            ),
-            onPressed: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ShowTextScreen()),
-
-            )
-          ),
+          )
         ],
       ),
     );

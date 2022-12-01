@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:your_second_eyes/screens/instruction_screen.dart';
-import 'package:your_second_eyes/widgets/page_view.dart';
+import 'package:your_second_eyes/widgets/page_view_instructor.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -32,6 +32,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           height: MediaQuery.of(context).size.height,
           fit: BoxFit.cover,
         ),
+        Padding(
+          padding: const EdgeInsets.only(left: 170, top: 620),
+          child: CircularProgressIndicator(
+
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 125, top: 680),
+          child: DefaultTextStyle(
+            child: Text('Waiting 5s'),
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 28
+            ),
+          ),
+        )
       ],
     );
   }

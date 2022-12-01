@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:your_second_eyes/screens/record_screen.dart';
-import 'package:your_second_eyes/screens/scan_screen.dart';
+import 'package:your_second_eyes/screens/selection_screen.dart';
 import 'package:your_second_eyes/screens/setting_screen.dart';
 
 import '../screens/instruction_screen.dart';
@@ -17,7 +16,6 @@ class _PageViewInstructorState extends State<PageViewInstructor> {
     initialPage: 0
   );
 
-
   @override
   Widget build(BuildContext context) {
     return PageView(
@@ -25,9 +23,8 @@ class _PageViewInstructorState extends State<PageViewInstructor> {
       scrollDirection: Axis.horizontal,
       children: [
         InstructionScreen(),
-        ScanScreen(),
-        RecordScreen(),
-        SettingScreen()
+        SettingScreen(),
+        SelectionScreen()
       ],
     );
   }
