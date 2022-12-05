@@ -15,9 +15,8 @@ class ScanScreen extends StatefulWidget {
 
 class _ScanScreenState extends State<ScanScreen> {
   bool textScanning = false;
-
+  static bool isScanning = false;
   XFile? imageFile;
-
   String scannedText = "";
 
   @override
@@ -29,6 +28,12 @@ class _ScanScreenState extends State<ScanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,
+            size: 40,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
         backgroundColor: Color.fromARGB(250, 32, 178, 170),
         centerTitle: true,
         title: Text('READING EVERYTHING',
@@ -57,20 +62,28 @@ class _ScanScreenState extends State<ScanScreen> {
           if(!textScanning && imageFile == null)
             Image(
               image: AssetImage('assets/scanning.png',),
-              height: 380,
+              height: 300,
+              width: 300,
             )
           else if(imageFile != null)
             Image.file(
               File(imageFile!.path),
-              height: 380,
+              height: 300,
             ),
+          SizedBox(height: 10),
+          // isScanning ? CircularProgressIndicator(
+          //   color: Color.fromARGB(250, 0, 158, 191),
+          // ) : Container(
+          //   height: 20,
+          //   color: Colors.white,
+          // ),
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 15, left: 60),
+                padding: const EdgeInsets.only(top: 15, left: 50),
                 child: ElevatedButton(
                   style: OutlinedButton.styleFrom(
-                      side: BorderSide(width: 3, color: Colors.blue),
+                      side: BorderSide(width: 4, color: Color.fromARGB(250, 0, 158, 191)),
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(side: BorderSide(
                           color: Colors.blue,
@@ -81,18 +94,18 @@ class _ScanScreenState extends State<ScanScreen> {
                       )
                   ),
                   onPressed: () {
-                    getImage();
+                    getImageGallery();
                   },
                   child: SizedBox(
-                    width: 90,
-                    height: 75,
+                    width: 100,
+                    height: 80,
                     child: Column(
                       children: [
                         SizedBox(height: 5),
                         Center(
                           child: Icon(
                               Icons.image,
-                              size: 38,
+                              size: 40,
                               color: Colors.grey
                           ),
                         ),
@@ -100,7 +113,7 @@ class _ScanScreenState extends State<ScanScreen> {
                           child: Text('Gallery',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 24,
                                 color: Colors.black
                             ),
                           ),
@@ -114,7 +127,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 padding: const EdgeInsets.only(top: 20, left: 40),
                 child: ElevatedButton(
                   style: OutlinedButton.styleFrom(
-                      side: BorderSide(width: 3, color: Colors.blue),
+                      side: BorderSide(width: 4, color: Color.fromARGB(250, 0, 158, 191)),
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(side: BorderSide(
                           color: Colors.blue,
@@ -124,17 +137,19 @@ class _ScanScreenState extends State<ScanScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(20))
                       )
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    cameraScan();
+                  },
                   child: SizedBox(
-                    width: 90,
-                    height: 75,
+                    width: 100,
+                    height: 80,
                     child: Column(
                       children: [
                         SizedBox(height: 5),
                         Center(
                           child: Icon(
                               Icons.camera_alt,
-                              size: 38,
+                              size: 40,
                               color: Colors.grey
                           ),
                         ),
@@ -142,7 +157,7 @@ class _ScanScreenState extends State<ScanScreen> {
                           child: Text('Camera',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 24,
                                 color: Colors.black
                             ),
                           ),
@@ -154,19 +169,72 @@ class _ScanScreenState extends State<ScanScreen> {
               )
             ],
           ),
-          //Text('$scannedText')
+          Padding(
+            padding: const EdgeInsets.only(top: 25, left: 10),
+            child: ElevatedButton(
+              style: OutlinedButton.styleFrom(
+                  side: BorderSide(width: 4, color: Color.fromARGB(250, 0, 158, 191)),
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(side: BorderSide(
+                      color: Colors.blue,
+                      width: 1,
+                      style: BorderStyle.solid
+                  ),
+                      borderRadius: BorderRadius.all(Radius.circular(20))
+                  )
+              ),
+              onPressed: () {
+                if(imageFile != null) {
+                  setState(() {
+                    isScanning = true;
+                    getRecognisedText(imageFile!);
+                    //isScanning = false;
+                  });
+
+                  // setState(() {
+                  //   isScanning = false;
+                  // });
+                }
+              },
+              child: SizedBox(
+                width: 100,
+                height: 80,
+                child: Column(
+                  children: [
+                    SizedBox(height: 5),
+                    Center(
+                      child: Icon(
+                          Icons.document_scanner_outlined,
+                          size: 40,
+                          color: Colors.grey
+                      ),
+                    ),
+                    Center(
+                      child: Text('Scan',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            color: Colors.black
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 
-  void getImage() async {
+  void getImageGallery() async {
     try {
       final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
       if(pickedImage != null) {
         textScanning = true;
         imageFile = pickedImage;
-        getRecognisedText(pickedImage);
+        // getRecognisedText(pickedImage);
 
         setState(() {});
       }
@@ -174,7 +242,25 @@ class _ScanScreenState extends State<ScanScreen> {
       textScanning = false;
       imageFile = null;
       setState(() {});
-      scannedText = "Erroe occured while scanning";
+      scannedText = "Error occured while scanning";
+    }
+  }
+
+  void cameraScan() async {
+    try {
+      final pickedImage = await ImagePicker().pickImage(source: ImageSource.camera);
+      if(pickedImage != null) {
+        textScanning = true;
+        imageFile = pickedImage;
+        // getRecognisedText(pickedImage);
+
+        setState(() {});
+      }
+    } catch (e) {
+      textScanning = false;
+      imageFile = null;
+      setState(() {});
+      scannedText = "Error occured while scanning";
     }
   }
 
@@ -186,7 +272,7 @@ class _ScanScreenState extends State<ScanScreen> {
     scannedText = "";
     for(TextBlock block in recognizedText.blocks) {
       for(TextLine line in block.lines) {
-        scannedText = scannedText + line.text + "\n";
+        scannedText = scannedText + line.text;
       }
     }
     textScanning = false;
@@ -213,3 +299,9 @@ class _ScanScreenState extends State<ScanScreen> {
     setState(() {});
   }
 }
+
+// class SetScanning {
+//   static void setIsScanning() {
+//      isScanning = false;
+//   }
+// }

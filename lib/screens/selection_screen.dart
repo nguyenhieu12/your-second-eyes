@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:your_second_eyes/screens/check_eyesight_screen.dart';
+import 'package:your_second_eyes/screens/record_screen.dart';
 import 'package:your_second_eyes/screens/scan_screen.dart';
 
 class SelectionScreen extends StatefulWidget {
@@ -50,14 +52,15 @@ class _SelectionScreenState extends State<SelectionScreen> {
                 },
                 child: Text('1',
                   style: TextStyle(
-                    fontSize: 180
+                    fontSize: 180,
+                    color: Color.fromARGB(200, 0, 158, 191)
                   ),
                 ),
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(width: 4, color: Colors.blue),
+                  side: BorderSide(width: 4, color: Color.fromARGB(200, 0, 158, 191)),
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(side: BorderSide(
-                    color: Colors.blue,
+                    color: Color.fromARGB(200, 0, 158, 191),
                     width: 1,
                     style: BorderStyle.solid
                   ),
@@ -73,17 +76,39 @@ class _SelectionScreenState extends State<SelectionScreen> {
               width: 160,
               height: 220,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => RecordScreen(),
+                        transitionDuration: const Duration(seconds: 1),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          var begin = const Offset(0.0, 1.0);
+                          var end = Offset.zero;
+                          var curve = Curves.ease;
+
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        },
+                      )
+                  );
+                },
                 child: Text('2',
                   style: TextStyle(
-                      fontSize: 180
+                      fontSize: 180,
+                      color: Color.fromARGB(200, 0, 158, 191)
                   ),
                 ),
                 style: OutlinedButton.styleFrom(
-                    side: BorderSide(width: 4, color: Colors.blue),
+                    side: BorderSide(width: 4, color: Color.fromARGB(200, 0, 158, 191)),
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(side: BorderSide(
-                        color: Colors.blue,
+                        color: Color.fromARGB(200, 0, 158, 191),
                         width: 1,
                         style: BorderStyle.solid
                     ),
@@ -99,17 +124,39 @@ class _SelectionScreenState extends State<SelectionScreen> {
               width: 160,
               height: 220,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => CheckEyesightScreen(),
+                        transitionDuration: const Duration(seconds: 1),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          var begin = const Offset(0.0, 1.0);
+                          var end = Offset.zero;
+                          var curve = Curves.ease;
+
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        },
+                      )
+                  );
+                },
                 child: Text('3',
                   style: TextStyle(
-                      fontSize: 180
+                      fontSize: 180,
+                      color: Color.fromARGB(200, 0, 158, 191)
                   ),
                 ),
                 style: OutlinedButton.styleFrom(
-                    side: BorderSide(width: 4, color: Colors.blue),
+                    side: BorderSide(width: 4, color: Color.fromARGB(200, 0, 158, 191)),
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(side: BorderSide(
-                        color: Colors.blue,
+                        color: Color.fromARGB(200, 0, 158, 191),
                         width: 1,
                         style: BorderStyle.solid
                     ),

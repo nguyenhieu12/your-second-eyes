@@ -50,12 +50,19 @@ class _InstructionScreenState extends State<InstructionScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 50, top: 600),
-            child: Image.asset('assets/blue_arrow.png',
-              width: 280,
-              height: 120,
-            )
+            padding: const EdgeInsets.only(left: 100, top: 570),
+            child: Icon(Icons.arrow_back,
+              size: 200,
+              color: Color.fromARGB(200, 0, 158, 191),
+            ),
           )
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 50, top: 600),
+          //   child: Image.asset('assets/blue_arrow.png',
+          //     width: 280,
+          //     height: 120,
+          //   )
+          // )
         ],
       ),
     );
