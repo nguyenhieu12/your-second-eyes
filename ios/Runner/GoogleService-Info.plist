@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>151163954110-kn8brsml6430r47fomd5okkt287r92dv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.151163954110-kn8brsml6430r47fomd5okkt287r92dv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAg7Ml1EjhiQe7JcgTrhPW7CSTzHr5ZuBM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>151163954110</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.yourSecondEyes</string>
+	<key>PROJECT_ID</key>
+	<string>your-second-eyes</string>
+	<key>STORAGE_BUCKET</key>
+	<string>your-second-eyes.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:151163954110:ios:49918ec3e3f6f1fd7a4fef</string>
+</dict>
+</plist>

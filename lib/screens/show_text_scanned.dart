@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:your_second_eyes/screens/scan_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class ShowTextScanned extends StatefulWidget {
   final String textScanned;
@@ -10,6 +11,14 @@ class ShowTextScanned extends StatefulWidget {
 }
 
 class _ShowTextScannedState extends State<ShowTextScanned> {
+  final FlutterTts flutterTts = FlutterTts();
+
+  speak() async {
+    await flutterTts.setLanguage('vi-VN');
+    await flutterTts.setPitch(1.0);
+    await flutterTts.setVolume(1.0);
+    await flutterTts.speak(widget.textScanned);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +32,10 @@ class _ShowTextScannedState extends State<ShowTextScanned> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 30, top: 120),
+            padding: const EdgeInsets.only(left: 5, top: 130),
             child: SizedBox(
-              width: 340,
-              height: 400,
+              width: 380,
+              height: 450,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(
@@ -40,10 +49,11 @@ class _ShowTextScannedState extends State<ShowTextScanned> {
                 ),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: Text(widget.textScanned,
+                  child: Text(widget.textScanned != "" ?
+                      widget.textScanned : 'Không có văn bản trên hình',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 50
+                      fontSize: 70
                     ),
                   ),
                 ),
@@ -51,7 +61,57 @@ class _ShowTextScannedState extends State<ShowTextScanned> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 82, top: 530),
+            padding: const EdgeInsets.only(left: 10, top: 600),
+            child: SizedBox(
+              width: 170,
+              height: 60,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    side: BorderSide(
+                        width: 4,
+                        color: Color.fromARGB(250, 2, 180, 186)
+                    ),
+                    shape: const StadiumBorder(),
+                    backgroundColor: Color.fromARGB(250, 2, 180, 186)
+                ),
+                onPressed: () async {
+                  await Clipboard.setData(ClipboardData(text: widget.textScanned));
+                },
+                child: Text('Sao chép',
+                  style: TextStyle(
+                      fontSize: 33,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 200, top: 600),
+            child: SizedBox(
+              width: 170,
+              height: 60,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    side: BorderSide(
+                        width: 4,
+                        color: Color.fromARGB(250, 2, 180, 186)
+                    ),
+                    shape: const StadiumBorder(),
+                    backgroundColor: Color.fromARGB(250, 2, 180, 186)
+                ),
+                onPressed: () => speak(),
+                child: Text('Phát âm',
+                  style: TextStyle(
+                      fontSize: 33,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 82, top: 680),
             child: SizedBox(
               width: 220,
               height: 60,

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "151163954110",
+    "project_id": "your-second-eyes",
+    "storage_bucket": "your-second-eyes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151163954110:android:4d23591fa999340e7a4fef",
+        "android_client_info": {
+          "package_name": "com.example.your_second_eyes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151163954110-kr2neilsqvaf27qeu1j28jlvd1gbf1qh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB21Ax7Uw4xJKEuLxsb_CwBCKuWrtnSEWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151163954110-kr2neilsqvaf27qeu1j28jlvd1gbf1qh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

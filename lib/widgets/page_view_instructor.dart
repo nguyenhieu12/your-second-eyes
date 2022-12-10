@@ -12,6 +12,8 @@ class PageViewInstructor extends StatefulWidget {
 }
 
 class _PageViewInstructorState extends State<PageViewInstructor> {
+  double speedRate = 50;
+  double volume = 50;
   final controller = PageController(
     initialPage: 0
   );
@@ -23,8 +25,8 @@ class _PageViewInstructorState extends State<PageViewInstructor> {
       scrollDirection: Axis.horizontal,
       children: [
         InstructionScreen(),
-        SettingScreen(),
-        SelectionScreen()
+        SettingScreen(speedRate: speedRate, volume: volume),
+        SelectionScreen(speedRate: speedRate, volume: volume)
       ],
     );
   }

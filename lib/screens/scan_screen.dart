@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:your_second_eyes/screens/show_text_scanned.dart';
@@ -62,8 +61,8 @@ class _ScanScreenState extends State<ScanScreen> {
           if(!textScanning && imageFile == null)
             Image(
               image: AssetImage('assets/scanning.png',),
-              height: 300,
-              width: 300,
+              height: 350,
+              width: 350,
             )
           else if(imageFile != null)
             Image.file(
@@ -272,7 +271,7 @@ class _ScanScreenState extends State<ScanScreen> {
     scannedText = "";
     for(TextBlock block in recognizedText.blocks) {
       for(TextLine line in block.lines) {
-        scannedText = scannedText + line.text;
+        scannedText = scannedText + line.text + ' ';
       }
     }
     textScanning = false;

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:your_second_eyes/screens/check_eyesight_screen.dart';
-import 'package:your_second_eyes/screens/record_screen.dart';
 import 'package:your_second_eyes/screens/scan_screen.dart';
 
 class SelectionScreen extends StatefulWidget {
-  const SelectionScreen({Key? key}) : super(key: key);
+  double speedRate;
+  double volume;
+
+  SelectionScreen({
+    Key? key,
+    required this.speedRate,
+    required this.volume
+  }) : super(key: key);
 
   @override
   State<SelectionScreen> createState() => _SelectionScreenState();
@@ -29,6 +35,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
               height: 220,
               child: TextButton(
                 onPressed: () {
+                  print(widget.speedRate.toString() + '\n' + widget.volume.toString());
                   Navigator.push(context,
                       PageRouteBuilder(
                         pageBuilder: (_, __, ___) => ScanScreen(),
@@ -79,7 +86,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                 onPressed: () {
                   Navigator.push(context,
                       PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => RecordScreen(),
+                        pageBuilder: (_, __, ___) => CheckEyesightScreen(),
                         transitionDuration: const Duration(seconds: 1),
                         transitionsBuilder:
                             (context, animation, secondaryAnimation, child) {

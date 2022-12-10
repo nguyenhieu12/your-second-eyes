@@ -10,12 +10,12 @@ class InstructionScreen extends StatefulWidget {
 
 class _InstructionScreenState extends State<InstructionScreen> {
   final FlutterTts flutterTts = FlutterTts();
-  final instructionText = "Hướng dẫn sử dụng";
+  final instructionText = "Hướng dẫn sử dụng ứng dụng";
 
   speak() async {
     await flutterTts.setLanguage("vi-VN");
-    await flutterTts.setPitch(1.0);
     await flutterTts.setVolume(1.0);
+    flutterTts.setSpeechRate(0.5);
     await flutterTts.speak(instructionText);
   }
 
@@ -25,44 +25,35 @@ class _InstructionScreenState extends State<InstructionScreen> {
       body: Stack(
         children: [
           Image(
-            image: AssetImage('assets/background.png'),
+            image: AssetImage('assets/intro_background.png'),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 15, top: 120),
-            child: DefaultTextStyle(
+            padding: const EdgeInsets.only(top: 120),
+            child: Text('Chạm để nghe',
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 42,
-                  color: Colors.black
+                fontWeight: FontWeight.bold,
+                fontSize: 60
               ),
-              child: Text('Hướng dẫn sử dụng'),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, top: 200),
+            padding: const EdgeInsets.only(left: 10, top: 190),
             child: IconButton(
               icon: Image.asset('assets/instructor_button.png'),
-              iconSize: 370,
+              iconSize: 400,
               onPressed: () => speak(),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 100, top: 570),
+            padding: const EdgeInsets.only(left: 100, top: 580),
             child: Icon(Icons.arrow_back,
               size: 200,
               color: Color.fromARGB(200, 0, 158, 191),
             ),
           )
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 50, top: 600),
-          //   child: Image.asset('assets/blue_arrow.png',
-          //     width: 280,
-          //     height: 120,
-          //   )
-          // )
         ],
       ),
     );
