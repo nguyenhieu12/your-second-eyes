@@ -12,15 +12,17 @@ class CheckEyesightScreen extends StatefulWidget {
 }
 
 class _CheckEyesightScreenState extends State<CheckEyesightScreen> {
-  late PageController _controller;//= PageController(initialPage: 0);
+  late PageController _controller;
   int _questionNumber = 1;
   int _score = 0;
   bool _isLocked = false;
+  late List<Question> questions;
 
   @override
   void initState() {
     super.initState();
     _controller = PageController(initialPage: 0);
+    questions = listQuestions;
   }
 
   @override
@@ -131,7 +133,7 @@ class _CheckEyesightScreenState extends State<CheckEyesightScreen> {
           } else {
             Navigator.push(context,
                 PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => ResultScreen(score: _score),
+                  pageBuilder: (_, __, ___) => ResultScreen(score: _score, questions: questions),
                   transitionDuration: const Duration(seconds: 1),
                   transitionsBuilder:
                       (context, animation, secondaryAnimation, child) {
@@ -162,11 +164,11 @@ class _CheckEyesightScreenState extends State<CheckEyesightScreen> {
       ),
     );
   }
+
+
 }
 
-
-
-class OptionWidget extends StatelessWidget {
+class OptionWidget extends StatefulWidget {
   final Question question;
   final ValueChanged<Option> onClickedOption;
 
@@ -177,20 +179,26 @@ class OptionWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<OptionWidget> createState() => _OptionWidgetState();
+}
+
+class _OptionWidgetState extends State<OptionWidget> {
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: question.options
-            .map((option) => buildOption(context, option)).toList()
+          children: widget.question.options
+              .map((option) => buildOption(context, option)).toList()
       ),
     );
 
   }
   // @override
   Widget buildOption(BuildContext context, Option option) {
-    final color = getColorForOption(option, question);
+    final color = getColorForOption(option, widget.question);
     return GestureDetector(
-      onTap: () => onClickedOption(option),
+      onTap: () => widget.onClickedOption(option),
       child: Padding(
         padding: const EdgeInsets.only(left: 130, top: 20),
         child: Container(
@@ -215,7 +223,7 @@ class OptionWidget extends StatelessWidget {
                     color: Colors.black
                 ),
               ),
-              getIconForOption(option, question)
+              getIconForOption(option, widget.question)
             ],
           ),
         ),
@@ -252,53 +260,132 @@ class OptionWidget extends StatelessWidget {
   }
 }
 
+
 class ResultScreen extends StatelessWidget {
+  final List<Question> questions;
   final int score;
 
   const ResultScreen({
     Key? key,
     required this.score,
+    required this.questions
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-          children: [
-            Center(
-              child: Text('Điểm của bạn: $score/${questions.length}'),
+    return Stack(
+      children: [
+        Image(
+          image: AssetImage('assets/background.png'),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          fit: BoxFit.cover,
+        ),
+        Center(
+          child: DefaultTextStyle(
+            child: Text('Điểm của bạn: $score/${questions.length}'),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 45,
+              color: Colors.black
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => SelectionScreen(speedRate: 50, volume: 50),
-                      transitionDuration: const Duration(seconds: 1),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        var begin = const Offset(0.0, 1.0);
-                        var end = Offset.zero;
-                        var curve = Curves.ease;
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 450, left: 120),
+          child: ElevatedButton(
+            style: OutlinedButton.styleFrom(
+                side: BorderSide(width: 4, color: Color.fromARGB(250, 0, 158, 191)),
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(side: BorderSide(
+                    color: Colors.blue,
+                    width: 1,
+                    style: BorderStyle.solid
+                ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                )
+            ),
+            onPressed: () {
+              Navigator.push(context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => SelectionScreen(speedRate: 50, volume: 50),
+                    transitionDuration: const Duration(seconds: 1),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      var begin = const Offset(0.0, 1.0);
+                      var end = Offset.zero;
+                      var curve = Curves.ease;
 
-                        var tween = Tween(begin: begin, end: end)
-                            .chain(CurveTween(curve: curve));
+                      var tween = Tween(begin: begin, end: end)
+                          .chain(CurveTween(curve: curve));
 
-                        return SlideTransition(
-                          position: animation.drive(tween),
-                          child: child,
-                        );
-                      },
-                    )
-                );
-              }, child: Text('Quay về trang lựa chọn'),
-            )
-          ],
+                      return SlideTransition(
+                        position: animation.drive(tween),
+                        child: child,
+                      );
+                    },
+                  )
+              );
+            },
+            child: SizedBox(
+              width: 120,
+              height: 80,
+              child: Column(
+                children: [
+                  SizedBox(height: 15),
+                  Center(
+                    child: Text('Trở lại',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40,
+                          color: Colors.black
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
         )
+      ],
     );
+    // return Scaffold(
+    //     body: Column(
+    //       children: [
+    //         Center(
+    //           child: Text('Điểm của bạn: $score/${questions.length}'),
+    //         ),
+    //         ElevatedButton(
+    //           onPressed: () {
+    //             Navigator.push(context,
+    //                 PageRouteBuilder(
+    //                   pageBuilder: (_, __, ___) => SelectionScreen(speedRate: 50, volume: 50),
+    //                   transitionDuration: const Duration(seconds: 1),
+    //                   transitionsBuilder:
+    //                       (context, animation, secondaryAnimation, child) {
+    //                     var begin = const Offset(0.0, 1.0);
+    //                     var end = Offset.zero;
+    //                     var curve = Curves.ease;
+    //
+    //                     var tween = Tween(begin: begin, end: end)
+    //                         .chain(CurveTween(curve: curve));
+    //
+    //                     return SlideTransition(
+    //                       position: animation.drive(tween),
+    //                       child: child,
+    //                     );
+    //                   },
+    //                 )
+    //             );
+    //           }, child: Text('Quay về trang lựa chọn'),
+    //         )
+    //       ],
+    //     )
+    // );
   }
 }
 
-final questions = [
+final listQuestions = [
   Question(
       text: 'Chọn chữ cái sau đây: A',
       options: [

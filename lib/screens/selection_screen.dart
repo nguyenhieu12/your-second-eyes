@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:your_second_eyes/screens/check_eyesight_screen.dart';
+import 'package:your_second_eyes/screens/record_screen.dart';
 import 'package:your_second_eyes/screens/scan_screen.dart';
 
 class SelectionScreen extends StatefulWidget {
@@ -29,10 +30,10 @@ class _SelectionScreenState extends State<SelectionScreen> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 150, left: 20),
+            padding: const EdgeInsets.only(top: 150, left: 10),
             child: SizedBox(
-              width: 160,
-              height: 220,
+              width: 180,
+              height: 240,
               child: TextButton(
                 onPressed: () {
                   print(widget.speedRate.toString() + '\n' + widget.volume.toString());
@@ -59,7 +60,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                 },
                 child: Text('1',
                   style: TextStyle(
-                    fontSize: 180,
+                    fontSize: 200,
                     color: Color.fromARGB(200, 0, 158, 191)
                   ),
                 ),
@@ -78,10 +79,10 @@ class _SelectionScreenState extends State<SelectionScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 150, left: 220),
+            padding: const EdgeInsets.only(top: 150, left: 205),
             child: SizedBox(
-              width: 160,
-              height: 220,
+              width: 180,
+              height: 240,
               child: TextButton(
                 onPressed: () {
                   Navigator.push(context,
@@ -107,7 +108,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                 },
                 child: Text('2',
                   style: TextStyle(
-                      fontSize: 180,
+                      fontSize: 200,
                       color: Color.fromARGB(200, 0, 158, 191)
                   ),
                 ),
@@ -128,13 +129,13 @@ class _SelectionScreenState extends State<SelectionScreen> {
           Padding(
             padding: const EdgeInsets.only(top: 420, left: 120),
             child: SizedBox(
-              width: 160,
-              height: 220,
+              width: 180,
+              height: 240,
               child: TextButton(
                 onPressed: () {
                   Navigator.push(context,
                       PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => CheckEyesightScreen(),
+                        pageBuilder: (_, __, ___) => RecordScreen(),
                         transitionDuration: const Duration(seconds: 1),
                         transitionsBuilder:
                             (context, animation, secondaryAnimation, child) {
@@ -155,7 +156,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                 },
                 child: Text('3',
                   style: TextStyle(
-                      fontSize: 180,
+                      fontSize: 200,
                       color: Color.fromARGB(200, 0, 158, 191)
                   ),
                 ),
