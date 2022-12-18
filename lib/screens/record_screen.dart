@@ -14,7 +14,7 @@ class RecordScreen extends StatefulWidget {
 class _RecordScreenState extends State<RecordScreen> {
   late stt.SpeechToText _speech;
   bool _isListening = false;
-  String _text = "Chạm và nói";
+  String _text = '';
   double _confidence = 1.0;
 
   @override
@@ -46,7 +46,7 @@ class _RecordScreenState extends State<RecordScreen> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 110),
         child: AvatarGlow(
-          animate: true,//_isListening,
+          animate: _isListening,
           glowColor: Colors.blue,
           endRadius: 60,
           duration: const Duration(milliseconds: 2000),
@@ -86,10 +86,10 @@ class _RecordScreenState extends State<RecordScreen> {
                 ),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: Text('',
+                  child: Text(_text,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 70
+                        fontSize: 40
                     ),
                   ),
                 ),
@@ -124,9 +124,9 @@ class _RecordScreenState extends State<RecordScreen> {
         _speech.listen(
           onResult: (val) => setState(() {
             _text = val.recognizedWords;
-            if(val.hasConfidenceRating && val.confidence > 0) {
-              _confidence = val.confidence;
-            }
+            // if(val.hasConfidenceRating && val.confidence > 0) {
+            //   _confidence = val.confidence;
+            // }
           })
         );
       } else {
@@ -136,6 +136,7 @@ class _RecordScreenState extends State<RecordScreen> {
         _speech.stop();
       }
     }
+    print(_text);
   }
 }
 

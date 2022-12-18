@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:your_second_eyes/screens/selection_screen.dart';
 
-import '../models/Option.dart';
-import '../models/Question.dart';
+import '../models/option.dart';
+import '../models/question.dart';
 
 class CheckEyesightScreen extends StatefulWidget {
   const CheckEyesightScreen({Key? key}) : super(key: key);
@@ -215,11 +215,11 @@ class _OptionWidgetState extends State<OptionWidget> {
           ),
           child: Column(
             children: [
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               DefaultTextStyle(
                 child: Text(option.text),
                 style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 35,
                     color: Colors.black
                 ),
               ),
